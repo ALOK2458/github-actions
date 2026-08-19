@@ -1,0 +1,26 @@
+name: Job Dependencies
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deliberately fail setup
+        run: exit 1
+
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build project
+        run: echo "Build complete"
+
+  deploy:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy project
+        run: echo "Deploy complete"
